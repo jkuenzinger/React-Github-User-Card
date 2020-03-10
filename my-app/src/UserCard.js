@@ -4,10 +4,10 @@ import React from 'react';
 // so it inherits the props of whatever unique id it recieves After looking at the shape of the data I have
 // determined that I can pull a username and picture from the data so i will start with those.
 function UserCard(props){
-    console.log(props)
+    console.log('this is props on card',props)
         return(
-        <div className='cardContainer'>
-            <div key={props.id} className='cardContent'>
+        <div >
+            <div key={props.id}>
                 <h2>Username: {props.name}</h2>
                 <img src={props.avatar_url} alt='users picture here'/>
             </div>

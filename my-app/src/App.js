@@ -2,7 +2,7 @@
 // that makes it so i can import everything right off the bat 
 import React from 'react';
 import axios from 'axios';
-import UserCard from './UserCard';
+import UserCard from './UserCard.js';
 import './App.css';
 //2 creating a class component below to hand state
 // i am  going to be initailizing two state properties
@@ -23,7 +23,7 @@ class App extends React.Component {
 componentDidMount(){
   axios
     .get('https://api.github.com/users/jkuenzinger')
-    // .then(res =>console.log(res))
+    .then(res =>console.log('this is the users call',res))
     .then(res => {
       this.setState({
         user: res.data
@@ -31,17 +31,18 @@ componentDidMount(){
     })
 // below i set up a .catch to return a console log of any error messages that appear while hadling the 
 // axios call
-      .catch(err => console.log(err.message));
+  .catch(err => console.log(err.message));
 
-
+  
 // I am going to make a second axios call now to pull the information for the followers data
 // after seeing the console log i see that it is goign to send me back an array of follower sso all i ahve to do is set the 
 // state of followers to the response it recieves back since i intialized as an empty array to begin with
 // added the same .catch for the error so that you get a console log of whats going on 
+
 axios
-  .get('https://api.github.com/users/followers')
+  .get('https://api.github.com/users/jkuenzinger/followers')
   .then(res => {
-    // console.log(res.data)
+console.log('this is the followers response',res)
     this.setState({
       followers: res.data
     })
@@ -55,7 +56,7 @@ render(){
 // I am now going to try and create a div and map through the follower array and display a div for each unique id it maps through
 // I am then going to tuse the login and avatarurl data points to get the username and image for each of the followers cards.
  return (
-  <div className="main-container">
+  <div >
     <div>
      <UserCard
      key={this.state.user.id}
@@ -64,17 +65,17 @@ render(){
      name={this.state.user.login}
      />
    </div>
-   <h2>Followers</h2>
-      {this.state.followers.map(follower => {
+ 
+   {this.state.followers.map(follower => {
      return (
       <div key={follower.id}>
         <h3>Username: {follower.login}</h3>
         <img src={follower.avatar_url} alt='followers photo here'/>  
       </div>
-     )
-   })}
-  </div>
-    );
+     ) 
+   })} 
+   </div>
+    )
   }
 }
 export default App;
