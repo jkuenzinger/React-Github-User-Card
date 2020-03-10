@@ -2,7 +2,7 @@
 // that makes it so i can import everything right off the bat 
 import React from 'react';
 import axios from 'axios';
-import UserCard from './components/UserCard';
+import UserCard from './UserCard';
 import './App.css';
 //2 creating a class component below to hand state
 // i am  going to be initailizing two state properties
@@ -55,7 +55,7 @@ render(){
 // I am now going to try and create a div and map through the follower array and display a div for each unique id it maps through
 // I am then going to tuse the login and avatarurl data points to get the username and image for each of the followers cards.
  return (
-    <div className="main-container">
+  <div className="main-container">
     <div>
      <UserCard
      key={this.state.user.id}
@@ -65,7 +65,7 @@ render(){
      />
    </div>
    <h2>Followers</h2>
-   {this.state.followers.map(follower => {
+      {this.state.followers.map(follower => {
      return (
       <div key={follower.id}>
         <h3>Username: {follower.login}</h3>
@@ -73,7 +73,7 @@ render(){
       </div>
      )
    })}
-    </div>
+  </div>
     );
   }
 }

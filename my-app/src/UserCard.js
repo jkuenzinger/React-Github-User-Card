@@ -7,7 +7,7 @@ function UserCard(props){
     console.log(props)
         return(
         <div className='cardContainer'>
-            <div className='cardContent' key={props.id}>
+            <div key={props.id} className='cardContent'>
                 <h2>Username: {props.name}</h2>
                 <img src={props.avatar_url} alt='users picture here'/>
             </div>
