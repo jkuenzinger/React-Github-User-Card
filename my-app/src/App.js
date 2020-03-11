@@ -2,19 +2,21 @@
 // that makes it so i can import everything right off the bat 
 import React from 'react';
 import axios from 'axios';
-import UserCard from './UserCard.js';
-import './App.css';
+import UserCard from './UserCard';
+
 //2 creating a class component below to hand state
 // i am  going to be initailizing two state properties
-// one for user which will be a string, and one for the followers
+// one for user 
+//which will be a string, and one for the followers
 // which will be an array of the followers to display
-class App extends React.Component {
- state={
-  user: '',
-  followers:[]
- };
 
-// below In my component DidMount I am going to access the github api using an axios call
+class App extends React.Component {
+ state= {
+  user: {},
+  followers:[]
+};
+
+ // below In my component DidMount I am going to access the github api using an axios call
 // I plan to console log the response so that i can see the shape of the data I am recieving
 // after checking the shape it is res.data  then a object containing the user data inside
 // then you use a this statement to update the state of user with the response.data it is getting
@@ -23,16 +25,17 @@ class App extends React.Component {
 componentDidMount(){
   axios
     .get('https://api.github.com/users/jkuenzinger')
-    .then(res =>console.log('this is the users call',res))
+    // .then(res =>console.log('this is the users call',res))
     .then(res => {
       this.setState({
         user: res.data
       })
     })
-// below i set up a .catch to return a console log of any error messages that appear while hadling the 
+
+    // below i set up a .catch to return a console log of any error messages that appear while hadling the 
 // axios call
   .catch(err => console.log(err.message));
-
+  
   
 // I am going to make a second axios call now to pull the information for the followers data
 // after seeing the console log i see that it is goign to send me back an array of follower sso all i ahve to do is set the 
@@ -51,18 +54,21 @@ console.log('this is the followers response',res)
 }
 
 render(){
+
 // returning the usercard in the main container div I then set the key to the user id since they are all uniqure and i set the id to the id of course
 // I  then set the avatar to the avatar_url becuase thats what is returning th eurl to the users image in the response form the api ping
 // I am now going to try and create a div and map through the follower array and display a div for each unique id it maps through
 // I am then going to tuse the login and avatarurl data points to get the username and image for each of the followers cards.
  return (
+   
   <div >
+    {console.log('this is what user state is',this.state.user)}
     <div>
      <UserCard
      key={this.state.user.id}
      id={this.state.user.id}
      avatar={this.state.user.avatar_url}
-     name={this.state.user.login}
+     login={this.state.user.login}
      />
    </div>
  
